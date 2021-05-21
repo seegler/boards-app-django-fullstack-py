@@ -76,6 +76,7 @@ def reply_topic(request, pk, topic_pk):
             post = form.save(commit=False)
             post.topic = topic
             post.created_by = request.user
+            topic.last_updated = timezone.now()
             post.save()
             return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
     else:
