@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.http import HttpResponse
@@ -10,7 +11,7 @@ from .models import Board, Topic, Post
 
 def home(request):
     boards = Board.objects.all()
-    return render(request, 'home.html', {'boards': boards})
+    return render(request, 'home.html', {'boards': boards, })
 
 
 def board_topics(request, pk):
@@ -21,7 +22,8 @@ def board_topics(request, pk):
         raise Http404
     '''
     board = get_object_or_404(Board, pk=pk)
-    return render(request, 'topics.html', {'board': board})
+    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
+    return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 
 @login_required
