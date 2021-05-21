@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView
 from django.utils import timezone
 from django.http import Http404, HttpResponse
 from .forms import NewTopicForm, PostForm
@@ -92,3 +92,9 @@ class PostUpdateView(UpdateView):
         post.updated_at = timezone.now()
         post.save()
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
+
+
+class BoardListView(ListView):
+    model = Board
+    context_object_name = 'boards'
+    template_name = 'home.html'
