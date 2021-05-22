@@ -9,7 +9,7 @@ __pycache__/
 *.py[cod]
 .env
 venv/
-
+sample-users.txt
 
 # SQLite database files
 
