@@ -3,5 +3,5 @@ DEBUG=True
 ALLOWED_HOSTS=.localhost,127.0.0.1
 
 #See https://github.com/jacobian/dj-database-url for other databases
-DATABASE_URL=f'sqlite:///{BASE_DIR}/django-boards-db.sqlite3'
+DATABASE_URL='sqlite:///{BASE_DIR}/django-boards-db.sqlite3'
 
