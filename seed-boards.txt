@@ -1,0 +1,8 @@
+# Run from python manage.py shell
+
+from boards.models import Board
+
+board = Board(name='Django Webframework', description='This is a board about Django Webframework.')
+board.save()
+board.id
+board.description
